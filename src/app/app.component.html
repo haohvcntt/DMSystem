@@ -1,0 +1,32 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened>
+    <div class="sidebar-header align-right">
+      <span>THE MENU</span>
+    </div>
+    <mat-nav-list>
+      <a mat-list-item href="#">Dashboard</a>
+      <a mat-list-item href="/customers">Customers</a>
+      <a mat-list-item href="/reports">Reports</a>
+      <a mat-list-item href="/settings">Settings</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>CRM Dashboard</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="accountMenu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #accountMenu="matMenu">
+        <button mat-menu-item>Profile</button>
+        <button mat-menu-item>Logout</button>
+      </mat-menu>
+    </mat-toolbar>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
