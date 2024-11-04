@@ -11,6 +11,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +30,12 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     MatMenuModule,
     MatButtonModule,
     MatGridListModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
+    InputGroupModule, 
+    InputGroupAddonModule, 
+    InputTextModule, 
+    ButtonModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

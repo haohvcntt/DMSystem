@@ -1,74 +1,99 @@
 <div *ngIf="dashboardData">
-    <h1>Dashboard</h1>
-    <pre>{{ dashboardData | json }}</pre>
+  <h1>Dashboard</h1>
+  <pre>{{ dashboardData | json }}</pre>
 </div>
 
+<div *ngIf="studentSchedule && studentSchedule.length > 0">
+  <h2><strong>Lịch học</strong></h2>
 
+  <!-- Course Input Form -->
+  <div class="container">
+    <div class="filter-content mt-3 mb-3">
+      
+      <!-- AutoComplete Input for Course Name -->
+      <div class="flex flex-column gap-2 mb-3">
+        <label for="tenhocphan" class="form-label" style="margin-right: 0.5cm">Tên học phần</label>
+        <p-autoComplete [(ngModel)]="selectedItem" [suggestions]="suggestions" (completeMethod)="search($event)" placeholder="Type to search...">
+        </p-autoComplete>
+      </div>
 
-<div *ngIf="studentSchedule.length > 0">
-    <h2>Student Schedule</h2>
-
-    <div class="container flex justify-content-center mb-5">
-        <p-dropdown [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true"
-            filterBy="name" [showClear]="true" placeholder="Select a Country">
-            <ng-template pTemplate="selectedItem" let-selectedOption>
-                <div class="flex align-items-center gap-2">
-                    <div>{{ selectedOption.name }}</div>
-                </div>
-            </ng-template>
-            <ng-template let-country pTemplate="item">
-                <div class="flex align-items-center gap-2">
-                    <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-                        [class]="'flag flag-' + country.code.toLowerCase()" style="width: 18px" />
-                    <div>{{ country.name }}</div>
-                </div>
-            </ng-template>
+      <!-- Dropdown Input for Course Selection -->
+      <div class="flex flex-column gap-2 mb-3">
+        <label for="dropdownCourse" class="form-label" style="margin-right: 0.5cm">Chọn học phần</label>
+        <p-dropdown 
+          [(ngModel)]="selectedItem" 
+          [options]="courses" 
+          optionLabel="courseName" 
+          [filter]="true" 
+          filterBy="courseName" 
+          [showClear]="true"
+          placeholder="Select a Course">
+          <ng-template let-course pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ course }}</div>
+            </div>
+        </ng-template>
         </p-dropdown>
+      </div>
     </div>
+  </div>
 
-    <p-table [value]="studentSchedule" [globalFilterFields]="['courseName', 'teacherName', 'roomName', 'date']"
-        selectionMode="single" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }" [rows]="50" [paginator]="true"
-        [rowsPerPageOptions]="[5, 10, 25, 50, 100]" stateStorage="session" stateKey="statedemo-session">
-        <ng-template pTemplate="header">
-            <tr>
-                <th pSortableColumn="courseName" style="width:25%">
-                    Course Name <p-sortIcon field="courseName" />
-                </th>
-                <th pSortableColumn="teacherName" style="width:25%">
-                    Teacher Name <p-sortIcon field="teacherName" />
-                </th>
-                <th pSortableColumn="roomName" style="width:25%">
-                    Room Name <p-sortIcon field="roomName" />
-                </th>
-                <th pSortableColumn="date" style="width:25%">
-                    Date <p-sortIcon field="date" />
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-element>
-            <tr [pSelectableRow]="element">
-                <td>
-                    <span class="p-column-title">Course Name</span>
-                    {{ element.courseName }}
-                </td>
-                <td>
-                    <span class="p-column-title">Teacher Name</span>
-                    {{ element.teacherName }}
-                </td>
-                <td>
-                    <span class="p-column-title">Room Name</span>
-                    {{ element.roomName }}
-                </td>
-                <td>
-                    <span class="p-column-title">Date</span>
-                    {{ element.date }}
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="4">No schedule found.</td>
-            </tr>
-        </ng-template>
-    </p-table>
+  <!-- Student Schedule Table -->
+  <p-table 
+    [value]="studentSchedule" 
+    [globalFilterFields]="['courseName', 'teacherName', 'roomName', 'date']"
+    selectionMode="single" 
+    dataKey="id" 
+    [tableStyle]="{ 'min-width': '50rem' }" 
+    [rows]="50" 
+    [paginator]="true"
+    [rowsPerPageOptions]="[5, 10, 25, 50, 100]" 
+    stateStorage="session" 
+    stateKey="statedemo-session">
+    
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="courseName" style="width:25%">
+          Tên học phần <p-sortIcon field="courseName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="teacherName" style="width:25%">
+          Tên giảng viên <p-sortIcon field="teacherName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="roomName" style="width:25%">
+          Phòng học <p-sortIcon field="roomName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="date" style="width:25%">
+          Ngày học <p-sortIcon field="date"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-element>
+      <tr [pSelectableRow]="element">
+        <td>
+          <span class="p-column-title">Course Name</span>
+          {{ element.courseName }}
+        </td>
+        <td>
+          <span class="p-column-title">Teacher Name</span>
+          {{ element.teacherName }}
+        </td>
+        <td>
+          <span class="p-column-title">Room Name</span>
+          {{ element.roomName }}
+        </td>
+        <td>
+          <span class="p-column-title">Date</span>
+          {{ element.date }}
+        </td>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No schedule found.</td>
+      </tr>
+    </ng-template>
+    
+  </p-table>
 </div>

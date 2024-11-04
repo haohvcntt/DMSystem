@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environment';
-import { map, Observable, of } from 'rxjs';
+import { groupBy, map, Observable, of } from 'rxjs';
 import { StudentSchedule } from '../models/personal-schedule';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class DashboardService {
     const url = 'https://iu.cmc-u.edu.vn/sinhvienapi/api/SV_ThongTin/LayDSLichCaNhan';
     const params = {
       strQLSV_NguoiHoc_Id: 'D5EBE41E05FD4C7CA511C6FCD6773C68',
-      strNgayBatDau: '01-05-2024',
+      strNgayBatDau: '01-01-2022',
       strNgayKetThuc: '10-08-2024'
     };
     const headers = new HttpHeaders({
@@ -44,6 +45,38 @@ export class DashboardService {
             roomName: item.TENPHONGHOC,
             date: item.THUHOC
           }));
+        } else {
+          return [];
+        }
+      })
+    );
+  }
+
+  getCourse(): Observable<any> {
+    const url = 'https://iu.cmc-u.edu.vn/sinhvienapi/api/SV_ThongTin/LayDSLichCaNhan';
+    const params = {
+      strQLSV_NguoiHoc_Id: 'D5EBE41E05FD4C7CA511C6FCD6773C68',
+      strNgayBatDau: '01-01-2022',
+      strNgayKetThuc: '10-08-2024'
+    };
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}` // Replace with your actual token
+    });
+    return this.http.get<{ Data: any[] }>(url, { params, headers })
+    .pipe(
+      map(res => {
+        if (Array.isArray(res.Data)) {
+          var rawData = res.Data.map((item: any) => ({
+            id: item.DANGKY_LOPHOCPHAN_ID,
+            courseName: item.TENHOCPHAN,
+            teacherName: item.GIANGVIEN,
+            roomName: item.TENPHONGHOC,
+            date: item.THUHOC
+          }));
+
+          var courses = _.groupBy(rawData, (item: { courseName: any; }) => item.courseName);
+          return courses; // Ensure a value is returned
+
         } else {
           return [];
         }

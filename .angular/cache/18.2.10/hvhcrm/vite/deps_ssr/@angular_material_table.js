@@ -2,7 +2,7 @@ import { createRequire } from 'module';const require = createRequire(import.meta
 import {
   ScrollingModule,
   ViewportRuler
-} from "./chunk-VFKJHB5E.js";
+} from "./chunk-YKQCYNBA.js";
 import {
   DataSource,
   _DisposeViewRepeaterStrategy,
@@ -10,16 +10,16 @@ import {
   _VIEW_REPEATER_STRATEGY,
   _ViewRepeaterOperation,
   isDataSource
-} from "./chunk-P5SLJDM3.js";
+} from "./chunk-6ROTAY3H.js";
 import {
   Directionality,
   MatCommonModule,
   Platform,
   _isNumberValue
-} from "./chunk-2UU7Q3SW.js";
+} from "./chunk-NYV5YPOR.js";
 import {
   DOCUMENT
-} from "./chunk-DQZ2PILJ.js";
+} from "./chunk-3NHSBHSE.js";
 import {
   Attribute,
   ChangeDetectionStrategy,
@@ -48,7 +48,6 @@ import {
   afterNextRender,
   booleanAttribute,
   inject,
-  require_operators,
   setClassMetadata,
   ɵɵInheritDefinitionFeature,
   ɵɵInputTransformsFeature,
@@ -83,10 +82,14 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-TKQWSO4T.js";
+} from "./chunk-ZNLGWT4J.js";
 import {
   require_cjs
-} from "./chunk-2H3L6IVL.js";
+} from "./chunk-5IW5ZEPE.js";
+import {
+  require_operators
+} from "./chunk-UOPINYA3.js";
+import "./chunk-RPWZ4CMX.js";
 import {
   __toESM
 } from "./chunk-NQ4HTGF6.js";
