@@ -8,14 +8,34 @@ import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/p
 
 import { ButtonModule } from 'primeng/button';
 
+import { TableModule } from 'primeng/table';
+import { HttpClientModule } from '@angular/common/http';
+import { InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { TagModule } from 'primeng/tag';
+import {PaginatorModule} from 'primeng/paginator';
+
+import { FormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
+    TableModule,
+    HttpClientModule,
+    InputTextModule,
+    TagModule,
+    IconFieldModule,
+    InputIconModule,
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
-    ButtonModule
+    ButtonModule,
+    PaginatorModule,
+    FormsModule,
+    DropdownModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
@@ -29,9 +49,9 @@ export class DashboardComponent implements OnInit {
 
   // paginator
   length = 50;
-  pageSize = 10;
+  pageSize = 500;
   pageIndex = 1;
-  pageSizeOptions = [5, 10, 25];
+  pageSizeOptions = [5, 10, 25, 50, 100];;
   pageEvent!: PageEvent;
 
   hidePageSize = false;
@@ -41,8 +61,24 @@ export class DashboardComponent implements OnInit {
 
   constructor(private _dashboardService: DashboardService) { }
 
+  countries: any[] | undefined;
+
+    selectedCountry: string | undefined;
+
   ngOnInit(): void {
     this.loadStudentSchedule();
+    this.countries = [
+      { name: 'Australia', code: 'AU' },
+      { name: 'Brazil', code: 'BR' },
+      { name: 'China', code: 'CN' },
+      { name: 'Egypt', code: 'EG' },
+      { name: 'France', code: 'FR' },
+      { name: 'Germany', code: 'DE' },
+      { name: 'India', code: 'IN' },
+      { name: 'Japan', code: 'JP' },
+      { name: 'Spain', code: 'ES' },
+      { name: 'United States', code: 'US' }
+  ];
   }
 
   ngAfterViewInit(): void {

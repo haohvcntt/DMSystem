@@ -9,6 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -30,4 +32,12 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class AppComponent {
   title = 'hvhcrm';
+
+  constructor(private modalService: NgbModal) { 
+  }
+
+
+  public open(modal: any) {
+    this.modalService.open(modal);
+  } 
 }
