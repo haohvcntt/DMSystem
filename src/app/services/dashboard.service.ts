@@ -10,7 +10,7 @@ import { StudentSchedule } from '../models/personal-schedule';
 export class DashboardService {
 
   private baseUrl = `${environment.apiBaseUrl}/dashboard`;
-  private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkNBM0I3MEY5OTZBRTQwMkNCNkU3QzI1MkMyNUJCNDI3OzMzY2NjNzc0OGIwZjQzOThiMTcwMzc4OGQ2MzMxZTczOzIwMjQxMTA1MTgwMDQ2IiwibmJmIjoxNzMwODA0NDQ2LCJleHAiOjE3MzMzOTY0NDYsImlhdCI6MTczMDgwNDQ0NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3QifQ.x_JG_hoL2z-nLxewXP1duadsuW5lbDWxLsxF_MZnwN4';
+  private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkNBM0I3MEY5OTZBRTQwMkNCNkU3QzI1MkMyNUJCNDI3OzRhY2RlZTFkNDljZDQ0YjRhMTY3ZGQ1OTY2YzU4MTJlOzIwMjQxMTA2MTEwNDA1IiwibmJmIjoxNzMwODY1ODQ1LCJleHAiOjE3MzM0NTc4NDUsImlhdCI6MTczMDg2NTg0NSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3QifQ.n8CTrsEBjAFw1xB6DdY5TSMwwXRhfdVrZoQ8YWWp0dQ';
   constructor(private http: HttpClient) { }
 
   getDashboardData() {
