@@ -7,93 +7,110 @@
   <h2><strong>Lịch học</strong></h2>
 
   <!-- Course Input Form -->
-  <div class="container">
-    <div class="filter-content mt-3 mb-3">
-      
-      <!-- AutoComplete Input for Course Name -->
-      <div class="flex flex-column gap-2 mb-3">
-        <label for="tenhocphan" class="form-label" style="margin-right: 0.5cm">Tên học phần</label>
-        <p-autoComplete [(ngModel)]="selectedItem" [suggestions]="suggestions" (completeMethod)="search($event)" placeholder="Type to search...">
-        </p-autoComplete>
-      </div>
+  <mat-card appearance="outlined" style="background-color: white; margin-bottom: 20px;">
+    <mat-card-title style="margin-top: 20px; margin-left: 20px; font-weight: bold;">Tìm kiếm thông tin sinh
+      viên</mat-card-title>
+    <mat-card-content>
+      <div class="container">
+        <div class="filter-content mt-3 mb-3">
+          <!-- AutoComplete Input for Course Name -->
+          <div class="flex flex-column gap-2 mb-3">
+            <label for="tenhocphan" class="form-label" style="margin-right: 0.5cm">Tên học phần</label>
+            <p-autoComplete [(ngModel)]="selectedItem" [suggestions]="suggestions" (completeMethod)="search($event)"
+              placeholder="Type to search...">
+            </p-autoComplete>
+          </div>
 
-      <!-- Dropdown Input for Course Selection -->
-      <div class="flex flex-column gap-2 mb-3">
-        <label for="dropdownCourse" class="form-label" style="margin-right: 0.5cm">Chọn học phần</label>
-        <p-dropdown 
-          [(ngModel)]="selectedItem" 
-          [options]="courses" 
-          optionLabel="courseName" 
-          [filter]="true" 
-          filterBy="courseName" 
-          [showClear]="true"
-          placeholder="Select a Course">
-          <ng-template let-course pTemplate="item">
-            <div class="flex align-items-center gap-2">
-                <div>{{ course }}</div>
-            </div>
-        </ng-template>
-        </p-dropdown>
+          <!-- Dropdown Input for Course Selection -->
+          <div class="flex flex-column gap-2 mb-3">
+            <label for="dropdownCourse" class="form-label" style="margin-right: 0.5cm">Chọn học phần</label>
+            <p-dropdown [(ngModel)]="selectedItem" [options]="courses" optionLabel="courseName" [filter]="true"
+              filterBy="courseName" [showClear]="true" placeholder="Select a Course">
+              <ng-template let-course pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                  <div>{{ course }}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </mat-card-content>
+  </mat-card>
 
   <!-- Student Schedule Table -->
-  <p-table 
-    [value]="studentSchedule" 
-    [globalFilterFields]="['courseName', 'teacherName', 'roomName', 'date']"
-    selectionMode="single" 
-    dataKey="id" 
-    [tableStyle]="{ 'min-width': '50rem' }" 
-    [rows]="50" 
-    [paginator]="true"
-    [rowsPerPageOptions]="[5, 10, 25, 50, 100]" 
-    stateStorage="session" 
-    stateKey="statedemo-session">
-    
-    <ng-template pTemplate="header">
-      <tr>
-        <th pSortableColumn="courseName" style="width:25%">
-          Tên học phần <p-sortIcon field="courseName"></p-sortIcon>
-        </th>
-        <th pSortableColumn="teacherName" style="width:25%">
-          Tên giảng viên <p-sortIcon field="teacherName"></p-sortIcon>
-        </th>
-        <th pSortableColumn="roomName" style="width:25%">
-          Phòng học <p-sortIcon field="roomName"></p-sortIcon>
-        </th>
-        <th pSortableColumn="date" style="width:25%">
-          Ngày học <p-sortIcon field="date"></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
-    
-    <ng-template pTemplate="body" let-element>
-      <tr [pSelectableRow]="element">
-        <td>
-          <span class="p-column-title">Course Name</span>
-          {{ element.courseName }}
-        </td>
-        <td>
-          <span class="p-column-title">Teacher Name</span>
-          {{ element.teacherName }}
-        </td>
-        <td>
-          <span class="p-column-title">Room Name</span>
-          {{ element.roomName }}
-        </td>
-        <td>
-          <span class="p-column-title">Date</span>
-          {{ element.date }}
-        </td>
-      </tr>
-    </ng-template>
-    
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="4">No schedule found.</td>
-      </tr>
-    </ng-template>
-    
-  </p-table>
+  <div class="card">
+    <p-table #dt2 [value]="studentSchedule" dataKey="id" [rows]="10" [paginator]="true"
+      [rowsPerPageOptions]="[5, 10, 25, 50, 100]" [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [globalFilterFields]="['courseName', 'teacherName', 'roomName', 'date']" stateStorage="session"
+      stateKey="statedemo-session">
+
+      <!-- Caption with Search and Clear Filters -->
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt2)"></button>
+          <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="filterGlobal($event, dt2)" placeholder="Search keyword" />
+          </span>
+        </div>
+      </ng-template>
+
+      <!-- Table Header with Column Filters -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="min-width:15rem">
+            <div class="flex justify-content-center align-items-center">
+              Tên học phần
+              <p-columnFilter type="text" field="courseName" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:15rem">
+            <div class="flex justify-content-center align-items-center">
+              Tên giảng viên
+              <p-columnFilter type="text" field="teacherName" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:15rem">
+            <div class="flex justify-content-center align-items-center">
+              Phòng học
+              <p-columnFilter type="text" field="roomName" display="menu"></p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:15rem">
+            <div class="flex justify-content-center align-items-center">
+              Ngày học
+              <p-columnFilter type="date" field="date" display="menu"></p-columnFilter>
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+
+      <!-- Table Body with Data Rows -->
+      <ng-template pTemplate="body" let-element>
+        <tr [pSelectableRow]="element">
+          <td>
+            {{ element.courseName }}
+          </td>
+          <td>
+            {{ element.teacherName }}
+          </td>
+          <td>
+            {{ element.roomName }}
+          </td>
+          <td>
+            {{ element.date | date: 'MM/dd/yyyy' }}
+          </td>
+        </tr>
+      </ng-template>
+
+      <!-- Empty Message -->
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4">No schedule found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>

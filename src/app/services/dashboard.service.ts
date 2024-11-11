@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 export class DashboardService {
 
   private baseUrl = `${environment.apiBaseUrl}/dashboard`;
-  private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkNBM0I3MEY5OTZBRTQwMkNCNkU3QzI1MkMyNUJCNDI3OzFjYjZhNDc5Yjk4OTQ0MzU4Y2JkMmE3Y2E2MTM5OTU2OzIwMjQxMDI1MTcwNzAzIiwibmJmIjoxNzI5ODUwODIzLCJleHAiOjE3MzI1MjkyMjMsImlhdCI6MTcyOTg1MDgyMywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3QifQ.A9jVh-k06XJCnCjL9GPZAveiliP8nKhK1fk_qBVcx5k';
+  private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkNBM0I3MEY5OTZBRTQwMkNCNkU3QzI1MkMyNUJCNDI3Ozc5ZjliMWI1YmQzMDQxMjY4YTg5NTM3NTkyMzVlNzk4OzIwMjQxMTA4MDg1OTA0IiwibmJmIjoxNzMxMDMxMTQ0LCJleHAiOjE3MzM2MjMxNDQsImlhdCI6MTczMTAzMTE0NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3QifQ.6iFxv7WOF01HdVkfT3isiVm6Kn-U1ugh4ywE7gxCABA';
   constructor(private http: HttpClient) { }
 
   getDashboardData() {
